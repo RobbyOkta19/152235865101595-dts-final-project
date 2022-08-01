@@ -65,7 +65,7 @@ const DetailPage = () => {
             p: 2,
           }}
         >
-          <Accordion expanded="true">
+          <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMore />}
               aria-controls="panel-about-content"
@@ -86,6 +86,24 @@ const DetailPage = () => {
               <DataPhone name={"Storage"} data={dataPhone?.data?.storage} />{" "}
             </AccordionDetails>
           </Accordion>
+          {dataPhone?.data?.specifications?.map((data, i) => (
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMore />}
+                aria-controls="panel-about-content"
+                id="panel-about"
+              >
+                <Typography variant="title" align="center">
+                  {data.title}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {data?.specs?.map((specs, i) => (
+                  <DataPhone name={specs.key} data={specs.val[0]} />
+                ))}
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </Card>
       </Grid>
     </Grid>
