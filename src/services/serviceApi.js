@@ -24,8 +24,17 @@ export const serviceApi = createApi({
         url: `latest`,
       }),
     }),
+    getDetail: builder.query({
+      query: (phone) => ({
+        url: `/${phone}`,
+      }),
+    }),
   }),
 });
 
-export const { useGetBrandsQuery, useGetBrandQuery, useGetLatestsQuery } =
-  serviceApi;
+export const {
+  useGetBrandsQuery,
+  useGetBrandQuery,
+  useGetLatestsQuery,
+  useGetDetailQuery,
+} = serviceApi;

@@ -6,6 +6,9 @@ const ErrorComponent = ({ message }) => {
     <Box
       sx={{
         display: "flex",
+        justifyContent: "center",
+        alignSelf: "center",
+        my: 2,
       }}
     >
       <Typography

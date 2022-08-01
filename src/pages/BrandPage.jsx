@@ -15,7 +15,7 @@ const BrandPage = () => {
     <>
       {dataBrands?.data?.title ? (
         <Card
-          item
+          container
           sx={{
             justifyContent: "center",
             alignItems: "center",
@@ -76,7 +76,15 @@ const BrandPage = () => {
               </>
             ) : (
               dataBrands?.data?.phones?.map((data, i) => (
-                <Grid key={i} item xs={4} sm={3} md={3} lg={2} sx={{ mx: 0.5 }}>
+                <Grid
+                  item
+                  key={i}
+                  xs={4}
+                  sm={3}
+                  md={3}
+                  lg={2}
+                  sx={{ mx: 0.2, mb: 1 }}
+                >
                   <PhoneCard key={i} phone={data} />
                 </Grid>
               ))
