@@ -1,5 +1,4 @@
 import {
-  Card,
   Grid,
   Typography,
   Accordion,
@@ -55,56 +54,82 @@ const DetailPage = () => {
           />
         )}
       </Grid>
-      <Grid item md={9} xs={12}>
-        <Card
-          sx={{
-            justifyContent: "center",
-            alignItems: "center",
-            alignSelf: "center",
-            mb: 1,
-            p: 2,
-          }}
-        >
+      <Grid
+        item
+        md={9}
+        xs={12}
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+          alignSelf: "center",
+        }}
+      >
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMore sx={{ color: "#ffffff" }} />}
+            aria-controls="panel-about-content"
+            id="panel-about"
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              alignSelf: "center",
+              backgroundColor: "#010DB0",
+              borderBottom: "1px solid #12738E",
+              marginBottom: -1,
+              color: "#666666",
+              minHeight: 56,
+              "&$expanded": {
+                minHeight: 56,
+              },
+            }}
+          >
+            <Typography color="white" fontSize={"1.2rem"} align="center">
+              About Phone
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails sx={{ padding: 2 }}>
+            <DataPhone name={"Brand"} data={dataPhone?.data?.brand} />
+            <DataPhone name={"Name"} data={dataPhone?.data?.phone_name} />
+            <DataPhone
+              name={"Release Date"}
+              data={dataPhone?.data?.release_date}
+            />{" "}
+            <DataPhone name={"Dimension"} data={dataPhone?.data?.dimension} />{" "}
+            <DataPhone name={"Operation System"} data={dataPhone?.data?.os} />{" "}
+            <DataPhone name={"Storage"} data={dataPhone?.data?.storage} />{" "}
+          </AccordionDetails>
+        </Accordion>
+        {dataPhone?.data?.specifications?.map((data, i) => (
           <Accordion>
             <AccordionSummary
-              expandIcon={<ExpandMore />}
+              expandIcon={<ExpandMore sx={{ color: "#ffffff" }} />}
               aria-controls="panel-about-content"
               id="panel-about"
+              sx={{
+                justifyContent: "center",
+                alignItems: "center",
+                alignSelf: "center",
+                backgroundColor: "#010DB0",
+                borderBottom: "1px solid #12738E",
+                marginBottom: -1,
+                color: "#666666",
+                minHeight: 56,
+                "&$expanded": {
+                  minHeight: 56,
+                },
+              }}
             >
-              <Typography variant="tittle" align="center">
-                About Phone
+              <Typography color="white" fontSize={"1.2rem"} align="center">
+                {data.title}
               </Typography>
             </AccordionSummary>
-            <AccordionDetails>
-              <DataPhone name={"BRAND"} data={dataPhone?.data?.brand} />
-              <DataPhone
-                name={"Release Date"}
-                data={dataPhone?.data?.release_date}
-              />{" "}
-              <DataPhone name={"DIMENSION"} data={dataPhone?.data?.dimension} />{" "}
-              <DataPhone name={"Operation System"} data={dataPhone?.data?.os} />{" "}
-              <DataPhone name={"Storage"} data={dataPhone?.data?.storage} />{" "}
+            <AccordionDetails sx={{ p: 2 }}>
+              {data?.specs?.map((specs, i) => (
+                <DataPhone key={i} name={specs.key} data={specs.val[0]} />
+              ))}
             </AccordionDetails>
           </Accordion>
-          {dataPhone?.data?.specifications?.map((data, i) => (
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMore />}
-                aria-controls="panel-about-content"
-                id="panel-about"
-              >
-                <Typography variant="title" align="center">
-                  {data.title}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                {data?.specs?.map((specs, i) => (
-                  <DataPhone name={specs.key} data={specs.val[0]} />
-                ))}
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </Card>
+        ))}
       </Grid>
     </Grid>
   );

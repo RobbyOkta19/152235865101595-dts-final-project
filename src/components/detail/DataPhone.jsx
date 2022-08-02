@@ -13,7 +13,17 @@ const DataPhone = ({ name, data }) => {
           alignSelf: "center",
         }}
       >
-        <Grid item md={3} lg={3} xs={12}>
+        <Grid
+          item
+          md={3}
+          lg={3}
+          xs={12}
+          sx={{
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            alignSelf: "center",
+          }}
+        >
           <Typography fontSize={"1.2rem"} fontWeight={"semi-bold"}>
             {name}
           </Typography>

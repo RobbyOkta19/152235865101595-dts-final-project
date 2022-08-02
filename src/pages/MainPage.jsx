@@ -5,8 +5,10 @@ import NavigationBar from "../components/NavBar";
 import HomePage from "../pages/HomePage";
 import BrandPage from "./BrandPage";
 import DetailPage from "./DetailPage";
+import FavoritPage from "./FavoritPage";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
+import SearchPage from "./SearchPage";
 
 const MainPage = () => {
   return (
@@ -36,9 +38,10 @@ const MainPage = () => {
               <Route path="/login" element={<LoginPage />}></Route>
               <Route path="/register" element={<RegisterPage />}></Route>
               <Route path="/" element={<HomePage />}></Route>
-              <Route path="/latest" element={<HomePage />}></Route>
+              <Route path="/favorit" element={<FavoritPage />}></Route>
               <Route path="/brand/:brand" element={<BrandPage />}></Route>
               <Route path="/detail/:phone" element={<DetailPage />}></Route>
+              <Route path="/search/:name" element={<SearchPage />}></Route>
             </Routes>
           </Box>
         </BrowserRouter>

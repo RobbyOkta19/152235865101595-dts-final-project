@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -6,13 +6,12 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -61,19 +60,32 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const pages = [
   { title: "Home", nav: "/" },
-  { title: "Top PHONE", nav: "/series" },
+  { title: "Favorit", nav: "/favorit" },
   { title: "Brands", nav: "/brand" },
 ];
 export default function NavigationBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  const [search, setSearch] = useState();
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const [user, isLoading, error] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
   const navigate = useNavigate();
 
+  const handleChangeSearch = (event) => {
+    console.log(event.target.value);
+    setSearch(event.target.value);
+  };
+
+  const searchPhone = () => {
+    if (search) {
+      navigate(`/search/${search}`);
+      setSearch("");
+    }
+  };
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -191,15 +203,22 @@ export default function NavigationBar() {
                 </MenuItem>
               ))}
             </Box>
+
             <Search sx={{ flexGrow: 1 }}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder="type Search…"
+                onChange={handleChangeSearch}
+                value={search}
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
+
+            <Button onClick={searchPhone} variant="outlined">
+              <SearchIcon />
+            </Button>
 
             <Box sx={{ display: { xs: "flex", md: "flex" } }}>
               {/* <IconButton

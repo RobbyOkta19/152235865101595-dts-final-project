@@ -29,6 +29,16 @@ export const serviceApi = createApi({
         url: `/${phone}`,
       }),
     }),
+    getFavorit: builder.query({
+      query: (query) => ({
+        url: `/${query}`,
+      }),
+    }),
+    getSearch: builder.query({
+      query: (query) => ({
+        url: `/search?query=${query}`,
+      }),
+    }),
   }),
 });
 
@@ -37,4 +47,6 @@ export const {
   useGetBrandQuery,
   useGetLatestsQuery,
   useGetDetailQuery,
+  useGetFavoritQuery,
+  useGetSearchQuery,
 } = serviceApi;
