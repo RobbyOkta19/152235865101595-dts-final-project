@@ -40,7 +40,7 @@ const SearchPage = () => {
           container
           spacing={0.5}
           sx={{
-            justifyContent: "center",
+            justifyContent: "space-around",
             alignItems: "flex-start",
             alignSelf: "center",
           }}
@@ -50,7 +50,7 @@ const SearchPage = () => {
               <Grid
                 item
                 sx={{
-                  justifyContent: "space-evenly",
+                  justifyContent: "center",
                   alignItems: "center",
                   alignSelf: "center",
                 }}
@@ -62,7 +62,7 @@ const SearchPage = () => {
             <>
               <LoadingComponent />
             </>
-          ) : (
+          ) : data?.data?.phones.length > 0 ? (
             data?.data?.phones?.map((data, i) => (
               <Grid
                 item
@@ -76,6 +76,17 @@ const SearchPage = () => {
                 <PhoneCard key={i} phone={data} />
               </Grid>
             ))
+          ) : (
+            <Grid
+              item
+              sx={{
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                alignSelf: "center",
+              }}
+            >
+              <ErrorComponent message={"Opss, Phone not found"} />
+            </Grid>
           )}
         </Grid>
       </Grid>

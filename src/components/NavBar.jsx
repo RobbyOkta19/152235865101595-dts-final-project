@@ -11,7 +11,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { Button, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -34,22 +34,11 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(1, 1, 1, 2),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
@@ -61,7 +50,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const pages = [
   { title: "Home", nav: "/" },
   { title: "Favorit", nav: "/favorit" },
-  { title: "Brands", nav: "/brand" },
 ];
 export default function NavigationBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -109,13 +97,6 @@ export default function NavigationBar() {
     handleMenuClose();
     logOut();
   };
-
-  // useEffect(() => {
-  //   console.log(user);
-  //   if (user) {
-  //     navigate("/");
-  //   }
-  // }, [user, isLoading, navigate, error]);
 
   const menuId = "profile-menu";
   const renderMenu = (
@@ -169,13 +150,13 @@ export default function NavigationBar() {
       <AppBar
         position="static"
         sx={{
-          bgcolor: "#040259",
+          bgcolor: "#00468b",
           px: { md: 10, sm: 2, lg: 10, xs: 2 },
           width: "100%",
         }}
       >
         <Container maxWidth="xl">
-          <Toolbar width="100%">
+          <Toolbar width="100%" sx={{ px: { xs: 0, md: 10 } }}>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -196,7 +177,9 @@ export default function NavigationBar() {
             >
               PHONE
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Box
+              sx={{ flexGrow: 1, px: 4, display: { xs: "none", md: "flex" } }}
+            >
               {pages.map((page, id) => (
                 <MenuItem key={page.nav} onClick={() => navigate(page.nav)}>
                   <Typography textAlign="center">{page.title}</Typography>
@@ -205,40 +188,19 @@ export default function NavigationBar() {
             </Box>
 
             <Search sx={{ flexGrow: 1 }}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
               <StyledInputBase
-                placeholder="type Search…"
+                placeholder="Search…"
                 onChange={handleChangeSearch}
                 value={search}
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
 
-            <Button onClick={searchPhone} variant="outlined">
+            <IconButton onClick={searchPhone} sx={{ color: "white" }}>
               <SearchIcon />
-            </Button>
+            </IconButton>
 
             <Box sx={{ display: { xs: "flex", md: "flex" } }}>
-              {/* <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-              >
-                <Badge badgeContent={4} color="error">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={17} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton> */}
               {isLoading ? (
                 <></>
               ) : user ? (
@@ -259,18 +221,6 @@ export default function NavigationBar() {
                 </MenuItem>
               )}
             </Box>
-            {/* <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </Box> */}
           </Toolbar>
         </Container>
       </AppBar>

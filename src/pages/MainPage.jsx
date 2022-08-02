@@ -19,7 +19,7 @@ const MainPage = () => {
           width: "100%",
           minHeight: "100vh",
 
-          background: "linear-gradient(0deg, #ffffff2b 30%, #f5f5ff)",
+          background: "linear-gradient(0deg, #ffffff 30%, #cde0f9)",
         }}
       >
         <BrowserRouter>

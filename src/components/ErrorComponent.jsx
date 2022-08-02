@@ -15,7 +15,7 @@ const ErrorComponent = ({ message }) => {
         textAlign="center"
         justify="center"
         variant="body1"
-        fontSize={"1.9rem"}
+        fontSize={"1.2rem"}
         sx={{
           color: "#de1f1f",
         }}
