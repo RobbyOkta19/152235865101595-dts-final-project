@@ -1,4 +1,4 @@
-import { Card, Typography } from "@mui/material";
+import { Card, Typography, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -22,26 +22,44 @@ const ProfilePage = () => {
     }
   }, [user]);
   return (
-    <Card sx={{ m: 2, px: { md: 10, sm: 2, xs: 2 }, py: 2, mb: 4 }}>
-      {dataUser ? (
-        <>
-          <Typography
-            fontSize={"1.3em"}
-            fontStyle="semi-bold"
-            textAlign="center"
-          >
-            {"PROFILE"}
-          </Typography>
-          <DataComponent name={"Name"} data={dataUser[0].name} />
-          <DataComponent name={"Email"} data={dataUser[0].email} />
-          <DataComponent name={"Address"} data={dataUser[0].address} />
-        </>
-      ) : (
-        <>
-          <LoadingComponent></LoadingComponent>{" "}
-        </>
-      )}
-    </Card>
+    <Grid
+      container
+      spacing={0.5}
+      sx={{
+        justifyContent: "center",
+        alignItems: "flex-start",
+        alignSelf: "center",
+      }}
+    >
+      <Card
+        sx={{
+          m: 2,
+          px: { md: 10, sm: 2, xs: 2 },
+          py: 2,
+          mb: 4,
+          width: { md: "80%", xs: "100%" },
+        }}
+      >
+        {dataUser ? (
+          <>
+            <Typography
+              fontSize={"1.3em"}
+              fontStyle="semi-bold"
+              textAlign="center"
+            >
+              {"PROFILE"}
+            </Typography>
+            <DataComponent name={"Name"} data={dataUser[0].name} />
+            <DataComponent name={"Email"} data={dataUser[0].email} />
+            <DataComponent name={"Address"} data={dataUser[0].address} />
+          </>
+        ) : (
+          <>
+            <LoadingComponent></LoadingComponent>{" "}
+          </>
+        )}
+      </Card>
+    </Grid>
   );
 };
 

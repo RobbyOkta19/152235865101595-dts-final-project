@@ -147,11 +147,20 @@ const LoginPage = () => {
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
-            </Button>{" "}
+            </Button>
+            <Typography
+              textAlign="center"
+              justify="center"
+              variant="body2"
+              fontSize={"1rem"}
+            >
+              Dont have account, please Register
+            </Typography>
             <Button
               onClick={() => navigate("/register")}
               fullWidth
               variant="contained"
+              color="secondary"
               sx={{ mt: 3, mb: 2 }}
             >
               Register
