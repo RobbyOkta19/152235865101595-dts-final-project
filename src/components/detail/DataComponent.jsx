@@ -1,7 +1,7 @@
 import { Divider, Grid, Typography } from "@mui/material";
 import React from "react";
 
-const DataPhone = ({ name, data }) => {
+const DataComponent = ({ name, data }) => {
   return (
     <>
       <Grid
@@ -62,4 +62,4 @@ const DataPhone = ({ name, data }) => {
   );
 };
 
-export default DataPhone;
+export default DataComponent;

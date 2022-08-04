@@ -1,5 +1,5 @@
-import React from "react";
-import { Grid, Typography, Card } from "@mui/material";
+import React, { useState } from "react";
+import { Grid, Typography, Card, Pagination } from "@mui/material";
 
 import ErrorComponent from "../components/ErrorComponent";
 import LoadingComponent from "../components/LoadingComponent";
@@ -9,13 +9,20 @@ import { useGetBrandQuery } from "../services/serviceApi";
 import { useParams } from "react-router-dom";
 const BrandPage = () => {
   let params = useParams();
-  const { data: dataBrands, isLoading, error } = useGetBrandQuery(params.brand);
+  const [page, setPage] = useState(1);
+  const {
+    data: dataBrands,
+    isLoading,
+    error,
+  } = useGetBrandQuery({ brand: params.brand, page: page });
 
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
   return (
     <>
       {dataBrands?.data?.title ? (
         <Card
-          container
           sx={{
             justifyContent: "center",
             alignItems: "center",
@@ -33,6 +40,26 @@ const BrandPage = () => {
             {dataBrands?.data?.title}
           </Typography>
         </Card>
+      ) : (
+        <></>
+      )}
+      {dataBrands?.data?.last_page > 1 ? (
+        <Grid
+          container
+          component={Card}
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            alignSelf: "center",
+            py: 2,
+            my: 2,
+          }}
+        >
+          <Pagination
+            count={dataBrands?.data?.last_page}
+            onChange={handleChange}
+          />
+        </Grid>
       ) : (
         <></>
       )}
@@ -74,7 +101,7 @@ const BrandPage = () => {
               <>
                 <LoadingComponent />
               </>
-            ) : (
+            ) : dataBrands?.data?.phones.length > 0 ? (
               dataBrands?.data?.phones?.map((data, i) => (
                 <Grid
                   item
@@ -88,6 +115,8 @@ const BrandPage = () => {
                   <PhoneCard key={i} phone={data} />
                 </Grid>
               ))
+            ) : (
+              <ErrorComponent message={"Data not Found"} />
             )}
           </Grid>
         </Grid>

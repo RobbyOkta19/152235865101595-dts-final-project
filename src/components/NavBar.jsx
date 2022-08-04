@@ -11,7 +11,6 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -115,7 +114,7 @@ export default function NavigationBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem>Profile</MenuItem>
+      <MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>
       <MenuItem onClick={logOutEvent}>Logout</MenuItem>
     </Menu>
   );
@@ -146,83 +145,81 @@ export default function NavigationBar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1, px: { xs: 0, md: 0 } }}>
+    <Box sx={{ flexGrow: 1, px: { xs: 0, md: 0 }, z: 50 }}>
       <AppBar
-        position="static"
         sx={{
           bgcolor: "#00468b",
-          px: { md: 10, sm: 2, lg: 10, xs: 2 },
+          px: { md: 8, sm: 2, lg: 8, xs: 0 },
           width: "100%",
+          position: "fixed",
+          top: 0,
+          z: 50,
         }}
       >
-        <Container maxWidth="xl">
-          <Toolbar width="100%" sx={{ px: { xs: 0, md: 10 } }}>
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+        <Toolbar width="100%">
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: "none", sm: "block" } }}
+          >
+            PHONE
+          </Typography>
+          <Box sx={{ flexGrow: 1, px: 4, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page, id) => (
+              <MenuItem key={page.nav} onClick={() => navigate(page.nav)}>
+                <Typography textAlign="center">{page.title}</Typography>
+              </MenuItem>
+            ))}
+          </Box>
+
+          <Search sx={{ flexGrow: 1 }}>
+            <StyledInputBase
+              placeholder="Search…"
+              onChange={handleChangeSearch}
+              value={search}
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+
+          <IconButton onClick={searchPhone} sx={{ color: "white" }}>
+            <SearchIcon />
+          </IconButton>
+
+          <Box sx={{ display: { xs: "flex", md: "flex" } }}>
+            {isLoading ? (
+              <></>
+            ) : user ? (
               <IconButton
                 size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
+                onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <MenuIcon />
+                <AccountCircle />
               </IconButton>
-            </Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
-            >
-              PHONE
-            </Typography>
-            <Box
-              sx={{ flexGrow: 1, px: 4, display: { xs: "none", md: "flex" } }}
-            >
-              {pages.map((page, id) => (
-                <MenuItem key={page.nav} onClick={() => navigate(page.nav)}>
-                  <Typography textAlign="center">{page.title}</Typography>
-                </MenuItem>
-              ))}
-            </Box>
-
-            <Search sx={{ flexGrow: 1 }}>
-              <StyledInputBase
-                placeholder="Search…"
-                onChange={handleChangeSearch}
-                value={search}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-
-            <IconButton onClick={searchPhone} sx={{ color: "white" }}>
-              <SearchIcon />
-            </IconButton>
-
-            <Box sx={{ display: { xs: "flex", md: "flex" } }}>
-              {isLoading ? (
-                <></>
-              ) : user ? (
-                <IconButton
-                  size="large"
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-              ) : (
-                <MenuItem onClick={() => navigate("login")}>
-                  <Typography textAlign="center">Login</Typography>
-                </MenuItem>
-              )}
-            </Box>
-          </Toolbar>
-        </Container>
+            ) : (
+              <MenuItem onClick={() => navigate("login")}>
+                <Typography textAlign="center">Login</Typography>
+              </MenuItem>
+            )}
+          </Box>
+        </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}

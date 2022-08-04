@@ -1,4 +1,4 @@
-import { Grid, Card } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
 import ErrorComponent from "../components/ErrorComponent";
 import LoadingComponent from "../components/LoadingComponent";

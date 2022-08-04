@@ -15,8 +15,8 @@ export const serviceApi = createApi({
       }),
     }),
     getBrand: builder.query({
-      query: (brand) => ({
-        url: `brands/${brand}`,
+      query: ({ brand, page }) => ({
+        url: `brands/${brand}?page=${page}`,
       }),
     }),
     getLatests: builder.query({

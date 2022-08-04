@@ -37,12 +37,15 @@ const TopList = ({ query }) => {
             sx={{
               px: 3,
               py: 1,
+              width: "100%",
               justifyContent: "center",
               alignItems: "center",
               alignSelf: "center",
             }}
           >
-            <Typography fontSize={"1.2em"}>{data?.data?.title}</Typography>{" "}
+            <Typography textAlign="center" fontSize={"1.2em"}>
+              {data?.data?.title}
+            </Typography>{" "}
           </Grid>
           {data?.data?.phones?.map((phone, i) => (
             <>

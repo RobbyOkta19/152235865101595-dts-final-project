@@ -9,6 +9,8 @@ import FavoritPage from "./FavoritPage";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import SearchPage from "./SearchPage";
+import Footer from "../components/Footer";
+import ProfilePage from "./ProfilePage";
 
 const MainPage = () => {
   return (
@@ -28,7 +30,8 @@ const MainPage = () => {
           <Box
             sx={{
               pt: ".5em",
-              px: { md: 10, sm: 10, xs: 3 },
+              px: { md: 8, sm: 8, xs: 3 },
+              my: { md: 8, sm: 7, xs: 7 },
               justifyContent: "center",
               alignItems: "flex-start",
               alignSelf: "center",
@@ -39,11 +42,13 @@ const MainPage = () => {
               <Route path="/register" element={<RegisterPage />}></Route>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/favorit" element={<FavoritPage />}></Route>
+              <Route path="/profile" element={<ProfilePage />}></Route>
               <Route path="/brand/:brand" element={<BrandPage />}></Route>
               <Route path="/detail/:phone" element={<DetailPage />}></Route>
               <Route path="/search/:name" element={<SearchPage />}></Route>
             </Routes>
           </Box>
+          <Footer></Footer>
         </BrowserRouter>
       </Box>
     </>

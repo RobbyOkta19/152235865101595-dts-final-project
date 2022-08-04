@@ -13,7 +13,7 @@ import { useGetDetailQuery } from "../services/serviceApi";
 import ErrorComponent from "../components/ErrorComponent";
 import LoadingComponent from "../components/LoadingComponent";
 import PhotoCard from "../components/detail/PhotoCard";
-import DataPhone from "../components/detail/DataPhone";
+import DataComponent from "../components/detail/DataComponent";
 
 const DetailPage = () => {
   let params = useParams();
@@ -88,15 +88,21 @@ const DetailPage = () => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ padding: 2 }}>
-            <DataPhone name={"Brand"} data={dataPhone?.data?.brand} />
-            <DataPhone name={"Name"} data={dataPhone?.data?.phone_name} />
-            <DataPhone
+            <DataComponent name={"Brand"} data={dataPhone?.data?.brand} />
+            <DataComponent name={"Name"} data={dataPhone?.data?.phone_name} />
+            <DataComponent
               name={"Release Date"}
               data={dataPhone?.data?.release_date}
             />{" "}
-            <DataPhone name={"Dimension"} data={dataPhone?.data?.dimension} />{" "}
-            <DataPhone name={"Operation System"} data={dataPhone?.data?.os} />{" "}
-            <DataPhone name={"Storage"} data={dataPhone?.data?.storage} />{" "}
+            <DataComponent
+              name={"Dimension"}
+              data={dataPhone?.data?.dimension}
+            />{" "}
+            <DataComponent
+              name={"Operation System"}
+              data={dataPhone?.data?.os}
+            />{" "}
+            <DataComponent name={"Storage"} data={dataPhone?.data?.storage} />{" "}
           </AccordionDetails>
         </Accordion>
         {dataPhone?.data?.specifications?.map((data, i) => (
@@ -125,7 +131,7 @@ const DetailPage = () => {
             </AccordionSummary>
             <AccordionDetails sx={{ p: 2 }}>
               {data?.specs?.map((specs, i) => (
-                <DataPhone key={i} name={specs.key} data={specs.val[0]} />
+                <DataComponent key={i} name={specs.key} data={specs.val[0]} />
               ))}
             </AccordionDetails>
           </Accordion>

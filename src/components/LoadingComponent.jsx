@@ -4,7 +4,12 @@ import React from "react";
 const LoadingComponent = () => {
   return (
     <Box
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
     >
       <Box height={"40px"}>
         <CircularProgress color="warning" />
